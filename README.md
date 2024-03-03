@@ -1,3 +1,5 @@
+[![End-to-end tests](https://github.com/AliAhmad05/checkers-decksOfCards/actions/workflows/ci.yml/badge.svg)](https://github.com/AliAhmad05/checkers-decksOfCards/actions/workflows/ci.yml)
+
 ## Owner
 
 The code in the repo is written by https://github.com/AliAhmad05
