@@ -3,6 +3,7 @@
 The code in the repo is written by https://github.com/AliAhmad05
 
 ## File Structure
+```
 └── 📁cypress
     └── 📁downloads
     └── 📁e2e
@@ -25,6 +26,7 @@ The code in the repo is written by https://github.com/AliAhmad05
 └── file.docx
 └── package-lock.json
 └── package.json
+```
 
 ### Prerequisites
 
