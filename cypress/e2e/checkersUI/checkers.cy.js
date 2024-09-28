@@ -25,6 +25,5 @@ describe('Checkers Test Suite', () => {
 
     Checkers.restart()
     Checkers.verifyRestart()
-
   })
 })
