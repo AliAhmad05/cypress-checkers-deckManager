@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "A Cypress-powered test framework for validating the Checkers game UI and managing cards deck via API.",
   "scripts": {
+    "test": "npx cypress run",
+    "test:open": "npx cypress open",
     "test:report": "npx cypress run --reporter mochawesome",
     "test:report:open": "npx cypress run --reporter mochawesome && open mochawesome-report/mochawesome.html",
     "test:report:open:chrome": "npx cypress run --reporter mochawesome --browser chrome && open mochawesome-report/mochawesome.html"
