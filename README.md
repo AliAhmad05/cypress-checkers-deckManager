@@ -25,8 +25,6 @@ The code in the repo is written by https://github.com/AliAhmad05
         └── commands.js
         └── e2e.js
 └── cypress.config.js
-└── file.docx
-└── package-lock.json
 └── package.json
 ```
 

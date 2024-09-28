@@ -1,0 +1,195 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-09-28T11:05:06.993Z",
+    "end": "2024-09-28T11:05:11.829Z",
+    "duration": 4836,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "75f818a2-29ed-4701-8168-e5f1a9a754b1",
+      "title": "",
+      "fullFile": "cypress/e2e/deckOfCardsAPI/deckOfCards.cy.js",
+      "file": "cypress/e2e/deckOfCardsAPI/deckOfCards.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "3a1bfa78-9436-43b7-8a8e-546f88145e0b",
+          "title": "Deck of Cards Test Suite",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Verify if the Site is up and running",
+              "fullTitle": "Deck of Cards Test Suite Verify if the Site is up and running",
+              "timedOut": null,
+              "duration": 1881,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'GET',\n  url: baseUrl,\n  headers: {\n    Accept: `application/json`,\n    'Content-Type': `application/json`\n  }\n}).then(response => {\n  cy.wrap(response).should('have.a.property', 'status', 200);\n});",
+              "err": {},
+              "uuid": "a64b47a4-4980-40ad-86ab-74bef8717ac7",
+              "parentUUID": "3a1bfa78-9436-43b7-8a8e-546f88145e0b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Get a new Deck",
+              "fullTitle": "Deck of Cards Test Suite Get a new Deck",
+              "timedOut": null,
+              "duration": 345,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'GET',\n  url: `${baseUrl}/api/deck/new/`,\n  headers: {\n    Accept: `application/json`,\n    'Content-Type': `application/json`\n  }\n}).then(response => {\n  expect(response.body.success).to.eq(true);\n  deckId = response.body.deck_id;\n});",
+              "err": {},
+              "uuid": "a4c2a37a-4987-4123-9798-c1f54535085f",
+              "parentUUID": "3a1bfa78-9436-43b7-8a8e-546f88145e0b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Shuffle the Deck",
+              "fullTitle": "Deck of Cards Test Suite Shuffle the Deck",
+              "timedOut": null,
+              "duration": 286,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'GET',\n  url: `${baseUrl}api/deck/${deckId}/shuffle/`,\n  headers: {\n    Accept: `application/json`,\n    'Content-Type': `application/json`\n  }\n}).then(response => {\n  expect(response.body.success).to.eq(true);\n  expect(response.body.shuffled).to.eq(true);\n});",
+              "err": {},
+              "uuid": "471c6a33-c7c6-445b-9423-3542db699615",
+              "parentUUID": "3a1bfa78-9436-43b7-8a8e-546f88145e0b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deal 3 Cards to each of 2 Players",
+              "fullTitle": "Deck of Cards Test Suite Deal 3 Cards to each of 2 Players",
+              "timedOut": null,
+              "duration": 266,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'GET',\n  url: `${baseUrl}api/deck/${deckId}/draw/?count=6`,\n  headers: {\n    Accept: `application/json`,\n    'Content-Type': `application/json`\n  }\n}).then(response => {\n  expect(response.body.success).to.eq(true);\n  expect(response.body.remaining).to.eq(46);\n  drawnCards = response.body.cards.map(card => card.code);\n  cy.log(`Drawn Cards: ${drawnCards}`);\n});",
+              "err": {},
+              "uuid": "8c708ec4-1aa9-40c8-ba8d-2134aaaa1ec2",
+              "parentUUID": "3a1bfa78-9436-43b7-8a8e-546f88145e0b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Add drawn cards to 2 Different Piles 2 Cards in First Pile and 1 Card in second Pile",
+              "fullTitle": "Deck of Cards Test Suite Add drawn cards to 2 Different Piles 2 Cards in First Pile and 1 Card in second Pile",
+              "timedOut": null,
+              "duration": 986,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "player1Cards = drawnCards.slice(0, 3);\nplayer2Cards = drawnCards.slice(3, 6);\ncy.log(`Player 1 Cards: ${player1Cards}`);\ncy.log(`Player 2 Cards: ${player2Cards}`);\ncy.request({\n  method: 'GET',\n  url: `${baseUrl}api/deck/${deckId}/pile/player1/add/?cards=${player1Cards}`,\n  headers: {\n    Accept: `application/json`,\n    'Content-Type': `application/json`\n  }\n}).then(response => {\n  expect(response.status).to.equal(200);\n  cy.wrap(response.body.piles).should('have.a.property', 'player1');\n});\ncy.request({\n  method: 'GET',\n  url: `${baseUrl}api/deck/${deckId}/pile/player2/add/?cards=${player2Cards}`,\n  headers: {\n    Accept: `application/json`,\n    'Content-Type': `application/json`\n  }\n}).then(response => {\n  expect(response.status).to.equal(200);\n  cy.wrap(response.body.piles).should('have.a.property', 'player2');\n});",
+              "err": {},
+              "uuid": "1b1c3238-841b-4d8c-9baf-50fe7f0987be",
+              "parentUUID": "3a1bfa78-9436-43b7-8a8e-546f88145e0b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Check whether either has Blackjack",
+              "fullTitle": "Deck of Cards Test Suite Check whether either has Blackjack",
+              "timedOut": null,
+              "duration": 961,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// I don't know what's a blackjack, tried to learn it from youtube // google but don't know how to play it with 3 cards\n// Since, I didn't know the whole scenario, if I have to use only two cards and throw 1 card away or just leave it as it is\n// and play with 3 cards and put a condition that my first card should be 1, the other two remaining cards should be equal to 10 each\n// or raise this question that is blackjack possible with 3 cards?\ncy.request('GET', `${baseUrl}api/deck/${deckId}/pile/player1/list`).then(response => {\n  const playerOneCards = response.body.piles.player1.cards;\n  const playerOneCardCodes = playerOneCards.map(card => card.code);\n  cy.wrap(playerOneCardCodes).should('deep.equal', player1Cards);\n  const playerOneValue = response.body.piles.player1.cards;\n  const player1Value = playerOneValue.map(card => card.value);\n  cy.log(`Player 1 Card Values: ${player1Value}`);\n  const hasBlackjackResult = (0, _checkIfBlackjack.hasBlackjack)(player1Value);\n  if (hasBlackjackResult) {\n    cy.log('The hand has Blackjack!');\n  } else {\n    cy.log('The hand does not have Blackjack.');\n  }\n});\ncy.request('GET', `${baseUrl}api/deck/${deckId}/pile/player2/list`).then(response => {\n  const playerTwoCards = response.body.piles.player2.cards;\n  const playerTwoCardCodes = playerTwoCards.map(card => card.code);\n  cy.wrap(playerTwoCardCodes).should('deep.equal', player2Cards);\n  const playerTwoValue = response.body.piles.player2.cards;\n  const player2Value = playerTwoValue.map(card => card.value);\n  cy.log(`Player 2 Card Values: ${player2Value}`);\n  const hasBlackjackResult = (0, _checkIfBlackjack.hasBlackjack)(player2Value);\n  if (hasBlackjackResult) {\n    cy.log('The hand has Blackjack!');\n  } else {\n    cy.log('The hand does not have Blackjack.');\n  }\n});",
+              "err": {},
+              "uuid": "f40ab85a-28d4-480c-9f47-2a061eed958d",
+              "parentUUID": "3a1bfa78-9436-43b7-8a8e-546f88145e0b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "a64b47a4-4980-40ad-86ab-74bef8717ac7",
+            "a4c2a37a-4987-4123-9798-c1f54535085f",
+            "471c6a33-c7c6-445b-9423-3542db699615",
+            "8c708ec4-1aa9-40c8-ba8d-2134aaaa1ec2",
+            "1b1c3238-841b-4d8c-9baf-50fe7f0987be",
+            "f40ab85a-28d4-480c-9f47-2a061eed958d"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 4725,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}
