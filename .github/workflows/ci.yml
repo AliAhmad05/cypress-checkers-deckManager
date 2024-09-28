@@ -1,18 +1,24 @@
 name: End-to-end tests
+
 on: [push]
+
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
+
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: cypress-screenshots-${{ github.run_id }}
           path: cypress/screenshots
-      # Test run video was always captured, so this action uses "always()" condition
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
