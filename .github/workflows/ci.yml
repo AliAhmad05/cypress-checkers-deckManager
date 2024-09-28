@@ -4,15 +4,17 @@ jobs:
   cypress-run:
     runs-on: ubuntu-22.04
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.cache/Cypress
             node_modules
           key: my-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
+      - run: npm i cypress
+      - uses: cypress-io/github-action@v6
+        with:
+          install: false
       # after the test run completes
       # store videos and any screenshots
       # NOTE: screenshots will be generated only if E2E test failed
