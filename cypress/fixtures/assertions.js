@@ -1,5 +1,5 @@
 const assertions = {
-  move: 'Make a move.',
+  move: 'Make a move.s',
   restart: 'Select an orange piece to move.'
 };
 
