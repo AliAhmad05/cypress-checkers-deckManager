@@ -2,5 +2,4 @@ node_modules/
 file.docx
 screenshots/
 .DS_Store
-package-lock.json
 mochawesome-report/
